@@ -11,3 +11,9 @@ Setup VS Code:
 ```
 curl https://raw.githubusercontent.com/bosiakov/config/master/settings.json > ~/.config/Code/User/settings.json
 ```
+
+Setup ZSH:
+
+```
+curl https://raw.githubusercontent.com/bosiakov/config/master/.zshrc > ~/.zshrc
+```

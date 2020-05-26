@@ -73,6 +73,10 @@ sudo chown eugene:eugene /media/fs
 sudo chmod +rw /media/fs
 echo "Check your config: sudo mount /media/fs"
 
+mkdir -p Documents/venvs
+mkdir -p Documents/work
+mkdir -p Documents/tmp
+
 echo "Essential gnome plugins:"
 echo "https://extensions.gnome.org/extension/15/alternatetab/"
 echo "https://extensions.gnome.org/extension/1503/tray-icons/"
