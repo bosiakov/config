@@ -1,0 +1,14 @@
+{
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.editor.enablePreview": false,
+    "workbench.tree.indent": 16,
+    "explorer.openEditors.visible": 0,
+    "workbench.editor.tabSizing": "shrink",
+    "workbench.colorTheme": "Visual Studio Light",
+    "git.autofetch": true,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "window.zoomLevel": 0,
+
+    "editor.fontFamily": "Fira Code",
+    "editor.fontLigatures": true
+}
