@@ -17,3 +17,11 @@ Setup ZSH:
 ```
 curl https://raw.githubusercontent.com/bosiakov/config/master/.zshrc > ~/.zshrc
 ```
+
+
+Setup Git:
+
+```
+curl https://raw.githubusercontent.com/bosiakov/config/master/.gitignore > ~/.gitignore
+curl https://raw.githubusercontent.com/bosiakov/config/master/.gitconfig > ~/.gitconfig
+```
