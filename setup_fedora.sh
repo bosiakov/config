@@ -7,7 +7,6 @@ sudo dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-r
 sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 sudo dnf install -y kernel-devel kernel-headers gcc make dkms acpid libglvnd-glx libglvnd-opengl libglvnd-devel pkgconfig 
-sudo dnf install -y java-latest-openjdk.x86_64
 sudo dnf install -y curl wget gnome-tweak-tool mc git zsh vim htop bash-completion vlc arc-theme util-linux-user
 sudo dnf install -y postgresql postgresql-server # install client/server
 sudo postgresql-setup initdb                     # initialize PG cluster
@@ -23,6 +22,11 @@ sudo flatpak install -y flathub com.spotify.Client
 sudo flatpak install -y flathub io.dbeaver.DBeaverCommunity
 sudo flatpak install flathub com.getpostman.Postman
 sudo flatpak install -y --from https://flathub.org/repo/appstream/com.skype.Client.flatpakref
+
+echo "JRE + JDK 11"
+sudo dnf install -y java-11-openjdk.x86_64 java-11-openjdk-devel.x86_64
+java -version
+javac -version
 
 echo "Media codecs"
 # https://docs.fedoraproject.org/en-US/quick-docs/assembly_installing-plugins-for-playing-movies-and-music/
@@ -60,9 +64,10 @@ sudo dnf check-update -y
 sudo dnf install -y code
 
 echo "Fonts"
-sudo dnf install -y curl cabextract xorg-x11-font-utils fontconfig
+sudo dnf install -y cabextract xorg-x11-font-utils fontconfig
 sudo rpm -i -y https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm # http://mscorefonts2.sourceforge.net/
 sudo dnf install -y dnf install fira-code-fonts
+echo "Download the Ubuntu Font Family: https://design.ubuntu.com/font/"
 
 echo "NTFS mount"
 sudo echo "\nUUID=<> /media/fs auto rw,user,auto 0 0" >> /etc/fstab
