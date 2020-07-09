@@ -7,7 +7,9 @@ sudo dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-r
 sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 sudo dnf install -y kernel-devel kernel-headers gcc make dkms acpid libglvnd-glx libglvnd-opengl libglvnd-devel pkgconfig 
-sudo dnf install -y curl wget gnome-tweak-tool mc git zsh vim htop bash-completion vlc arc-theme util-linux-user
+sudo dnf install -y curl wget gnome-tweak-tool mc git zsh vim htop bash-completion vlc arc-theme util-linux-user gimp
+
+echo "Postgres"
 sudo dnf install -y postgresql postgresql-server # install client/server
 sudo postgresql-setup initdb                     # initialize PG cluster
 sudo systemctl start postgresql                  # start cluster
