@@ -27,3 +27,9 @@ git config --global core.excludesfile ~/.gitignore_global
 
 curl https://raw.githubusercontent.com/bosiakov/config/master/.gitconfig > ~/.gitconfig
 ```
+
+SSH:
+
+```
+curl https://raw.githubusercontent.com/bosiakov/config/master/ssh_config > ~/.ssh/config
+```

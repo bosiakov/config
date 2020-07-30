@@ -10,5 +10,6 @@
     "window.zoomLevel": 0,
 
     "editor.fontFamily": "Fira Code",
-    "editor.fontLigatures": true
+    "editor.fontLigatures": true,
+    "editor.hover.enabled": false
 }
