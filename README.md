@@ -33,3 +33,10 @@ SSH:
 ```
 curl https://raw.githubusercontent.com/bosiakov/config/master/ssh_config > ~/.ssh/config
 ```
+
+Anti-procrastionation mode:
+
+```
+mkdir ~/.hosts && curl https://raw.githubusercontent.com/bosiakov/config/master/.hosts/procrast_hosts > ~/.hosts/procrast_hosts && curl https://raw.githubusercontent.com/bosiakov/config/master/.hosts/noprocrast_hosts > ~/.hosts/noprocrast_hosts
+mkdir ~/bin && curl https://raw.githubusercontent.com/bosiakov/config/master/work.sh > ~/bin/work.sh
+```

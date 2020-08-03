@@ -4,7 +4,7 @@ IFS=$'\n\t'
 
 echo "Essential software"
 
-sudo apt install -y curl wget arc-theme build-essential chrome-gnome-shell gnome-tweak-tool mc git zsh python python3-dev evolution evolution-ews postgresql postgresql-contrib default-jre default-jdk gcc g++ make x11-utils vim vim-gtk3 colordiff gimp htop subversion net-tools
+sudo apt install -y curl wget arc-theme build-essential chrome-gnome-shell gnome-tweak-tool mc git zsh python python3-dev evolution evolution-ews postgresql postgresql-contrib openjdk-11-jdk openjdk-11-jre openjdk-11-source gcc g++ make x11-utils vim vim-gtk3 colordiff gimp htop subversion net-tools
 
 echo "Sublime Text + Merge"
 
