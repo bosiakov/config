@@ -65,6 +65,15 @@ sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.m
 sudo dnf check-update -y
 sudo dnf install -y code
 
+code --install-extension tonsky.theme-alabaster
+code --install-extension mishkinf.goto-next-previous-member
+code --install-extension eamodio.gitlens
+code --install-extension ms-python.python
+code --install-extension ms-vscode.hexeditor
+code --install-extension redhat.vscode-yaml
+code --install-extension scala-lang.scala
+code --install-extension scalameta.metals
+
 echo "Fonts"
 sudo dnf install -y cabextract xorg-x11-font-utils fontconfig
 sudo rpm -i -y https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm # http://mscorefonts2.sourceforge.net/
