@@ -5,4 +5,5 @@
 	"line_padding_top": 1,
 	"line_numbers": false,
 	"gutter": false,
+	"preview_on_click": false
 }
