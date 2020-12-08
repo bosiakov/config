@@ -1,20 +1,26 @@
 #!/bin/bash
 set -euo pipefail
-IFS=$'\n\t'
 
 sudo dnf update -y
 sudo dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
 sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 sudo dnf install -y kernel-devel kernel-headers gcc make dkms acpid libglvnd-glx libglvnd-opengl libglvnd-devel pkgconfig 
-sudo dnf install -y curl wget gnome-tweak-tool mc git zsh vim htop bash-completion vlc arc-theme util-linux-user gimp
+sudo dnf install -y curl wget gnome-tweak-tool mc git zsh vim htop bash-completion vlc util-linux-user gimp patch libpq-devel openssh-askpass
+
+echo "OhMyZSH"
+sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 echo "Postgres"
-sudo dnf install -y postgresql postgresql-server # install client/server
-sudo postgresql-setup initdb                     # initialize PG cluster
-sudo systemctl start postgresql                  # start cluster
-sudo systemctl enable postgresql 
-echo "https://stackoverflow.com/questions/7695962/postgresql-password-authentication-failed-for-user-postgres"
+
+sudo dnf install -y postgresql
+
+echo "Redis-cli"
+wget http://download.redis.io/redis-stable.tar.gz
+tar xvzf redis-stable.tar.gz
+cd redis-stable
+make redis-cli
+sudo cp src/redis-cli /usr/local/bin/
 
 echo "Flatpak"
 # https://docs.fedoraproject.org/en-US/quick-docs/installing-spotify/
@@ -42,12 +48,9 @@ sudo python3 get-pip.py
 sudo pip3 install virtualenv
 rm -rf get-pip.py
 
-echo "OhMyZSH"
-sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
 echo "Install NodeJS"
-curl -sL https://rpm.nodesource.com/setup_14.x | sudo -E bash -
-sudo dnf install -y nodejs
+curl https://get.volta.sh | bash
+volta install node
 
 echo "Sublime text"
 sudo rpm -v --import https://download.sublimetext.com/sublimehq-rpm-pub.gpg
@@ -75,10 +78,8 @@ code --install-extension scala-lang.scala
 code --install-extension scalameta.metals
 
 echo "Fonts"
-sudo dnf install -y cabextract xorg-x11-font-utils fontconfig
 sudo rpm -i -y https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm # http://mscorefonts2.sourceforge.net/
-sudo dnf install -y dnf install fira-code-fonts
-echo "Download the Ubuntu Font Family: https://design.ubuntu.com/font/"
+sudo dnf install -y fira-code-fonts
 
 echo "NTFS mount"
 sudo echo "\nUUID=<> /media/fs auto rw,user,auto 0 0" >> /etc/fstab

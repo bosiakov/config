@@ -13,5 +13,8 @@
     "editor.fontSize": 14,
     "editor.fontLigatures": true,
     "git.confirmSync": false,
-    "scm.alwaysShowRepositories": true
+    "scm.alwaysShowRepositories": true,
+    "editor.minimap.enabled": false,
+    "python.formatting.provider": "black",
+    "breadcrumbs.enabled": false
 }
