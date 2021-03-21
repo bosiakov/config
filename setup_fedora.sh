@@ -5,31 +5,11 @@ sudo dnf update -y
 sudo dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
 sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
-sudo dnf install -y kernel-devel kernel-headers gcc make dkms acpid libglvnd-glx libglvnd-opengl libglvnd-devel pkgconfig 
+sudo dnf install -y kernel-devel kernel-headers gcc make dkms acpid libglvnd-glx libglvnd-opengl libglvnd-devel pkgconfig perl-open cloc
 sudo dnf install -y curl wget gnome-tweak-tool mc git zsh vim htop bash-completion vlc util-linux-user gimp patch libpq-devel openssh-askpass
 
 echo "OhMyZSH"
 sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-echo "Postgres"
-
-sudo dnf install -y postgresql
-
-echo "Redis-cli"
-wget http://download.redis.io/redis-stable.tar.gz
-tar xvzf redis-stable.tar.gz
-cd redis-stable
-make redis-cli
-sudo cp src/redis-cli /usr/local/bin/
-
-echo "Flatpak"
-# https://docs.fedoraproject.org/en-US/quick-docs/installing-spotify/
-sudo dnf install -y flatpak
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-sudo flatpak install -y flathub com.spotify.Client
-sudo flatpak install -y flathub io.dbeaver.DBeaverCommunity
-sudo flatpak install flathub com.getpostman.Postman
-sudo flatpak install -y --from https://flathub.org/repo/appstream/com.skype.Client.flatpakref
 
 echo "JRE + JDK 11"
 sudo dnf install -y java-11-openjdk.x86_64 java-11-openjdk-devel.x86_64
@@ -42,25 +22,25 @@ sudo dnf install -y gstreamer1-plugins-{bad-\*,good-\*,base} gstreamer1-plugin-o
 sudo dnf install -y lame\* --exclude=lame-devel
 sudo dnf group upgrade -y --with-optional Multimedia
 
-echo "Python 3"
+echo "PIP"
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 sudo python3 get-pip.py
 sudo pip3 install virtualenv
 rm -rf get-pip.py
 
-echo "Install NodeJS"
-curl https://get.volta.sh | bash
-volta install node
+echo "NodeJS"
+sudo dnf -y install nodejs
 
 echo "Sublime text"
 sudo rpm -v --import https://download.sublimetext.com/sublimehq-rpm-pub.gpg
 sudo dnf config-manager --add-repo https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
 sudo dnf install -y sublime-text sublime-merge
 
-echo "SBT"
-curl https://bintray.com/sbt/rpm/rpm > bintray-sbt-rpm.repo
-sudo mv bintray-sbt-rpm.repo /etc/yum.repos.d/
-sudo yum install -y sbt
+echo "SDKMAN"
+curl -s "https://get.sdkman.io" | bash
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+sdk version
+sdk install sbt
 
 echo "VSCode"
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
@@ -68,34 +48,28 @@ sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.m
 sudo dnf check-update -y
 sudo dnf install -y code
 
-code --install-extension tonsky.theme-alabaster
-code --install-extension mishkinf.goto-next-previous-member
-code --install-extension eamodio.gitlens
 code --install-extension ms-python.python
 code --install-extension ms-vscode.hexeditor
 code --install-extension redhat.vscode-yaml
 code --install-extension scala-lang.scala
-code --install-extension scalameta.metals
 
 echo "Fonts"
-sudo rpm -i -y https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm # http://mscorefonts2.sourceforge.net/
-sudo dnf install -y fira-code-fonts
+sudo dnf -y copr enable chenxiaolong/ubuntu-fonts 
+sudo dnf -y install ubuntu-family-fonts fontconfig-ubuntu ubuntu-font-gsettings
+sudo dnf -y install fira-code-fonts # https://github.com/tonsky/FiraCode/wiki/Linux-instructions#manual-installation
 
-echo "NTFS mount"
-sudo echo "\nUUID=<> /media/fs auto rw,user,auto 0 0" >> /etc/fstab
-sudo blkid
-sudo subl /etc/fstab
-sudo mkdir /media/fs
-sudo chown eugene:eugene /media/fs
-sudo chmod +rw /media/fs
-echo "Check your config: sudo mount /media/fs"
+echo "PODMAN"
+echo 'eugene ALL=(ALL) NOPASSWD: /usr/bin/podman' | sudo EDITOR='tee -a' visudo
 
-mkdir -p Documents/venvs
-mkdir -p Documents/work
-mkdir -p Documents/tmp
+echo "Flatpak"
+# https://docs.fedoraproject.org/en-US/quick-docs/installing-spotify/
+sudo dnf install -y flatpak
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+sudo flatpak install -y flathub com.spotify.Client
+sudo flatpak install flathub com.getpostman.Postman
+
+mkdir ~/bin/
 
 echo "Essential gnome plugins:"
 echo "https://extensions.gnome.org/extension/15/alternatetab/"
-echo "https://extensions.gnome.org/extension/1503/tray-icons/"
 echo "https://extensions.gnome.org/extension/307/dash-to-dock/"
-echo "https://extensions.gnome.org/extension/1267/no-title-bar/"
